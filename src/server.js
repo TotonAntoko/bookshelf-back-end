@@ -1,5 +1,4 @@
 const Hapi = require('@hapi/hapi')
-const routes = require('./routes')
 
 // Books
 const books = require('./api/books')
