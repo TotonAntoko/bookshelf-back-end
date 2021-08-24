@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Hapi = require('@hapi/hapi')
 
 // Books
@@ -9,8 +11,8 @@ const init = async () => {
   const booksService = new BooksService()
 
   const server = Hapi.server({
-    port: process.env.PORT || 5000,
-    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
+    port: process.env.PORT,
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : process.env.HOST,
     routes: {
       cors: {
         origin: ['*']
