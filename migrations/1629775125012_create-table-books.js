@@ -34,6 +34,10 @@ exports.up = pgm => {
       type: 'INTEGER',
       notNull: true
     },
+    finished: {
+      type: 'BOOL',
+      notNull: true
+    },
     reading: {
       type: 'BOOL',
       notNull: true
