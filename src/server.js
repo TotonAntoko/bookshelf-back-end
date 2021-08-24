@@ -2,7 +2,7 @@ const Hapi = require('@hapi/hapi')
 
 // Books
 const books = require('./api/books')
-const BooksService = require('./services/inMemory/BooksService')
+const BooksService = require('./services/postgres/BooksService')
 const BooksValidator = require('./validator/books')
 
 const init = async () => {
