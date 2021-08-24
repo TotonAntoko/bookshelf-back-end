@@ -79,7 +79,8 @@ class BooksService {
 
     const mapBooksDBToModel = (books) => (
       books.map((book) => {
-        const { id, name, year, author, summary, publisher, pageCount, readPage, finished, reading, created_at, updated_at } = book
+        // eslint-disable-next-line camelcase
+        const { id, name, year, author, summary, publisher, page_count, read_page, finished, reading, created_at, updated_at } = book
         return {
           id,
           name,
@@ -87,8 +88,8 @@ class BooksService {
           author,
           summary,
           publisher,
-          pageCount,
-          readPage,
+          pageCount: page_count,
+          readPage: read_page,
           finished,
           reading,
           insertedAt: created_at,
