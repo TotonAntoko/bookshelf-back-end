@@ -26,11 +26,11 @@ exports.up = pgm => {
       type: 'VARCHAR',
       notNull: true
     },
-    pageCount: {
+    page_count: {
       type: 'INTEGER',
       notNull: true
     },
-    readPage: {
+    read_page: {
       type: 'INTEGER',
       notNull: true
     },
