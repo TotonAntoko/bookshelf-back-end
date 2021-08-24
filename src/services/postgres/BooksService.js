@@ -70,13 +70,34 @@ class BooksService {
       values: [id]
     }
 
-    const book = await this._pool.query(query)
+    const result = await this._pool.query(query)
+    const book = result.rows
 
-    if (!book.rows.length) {
+    if (!book.length) {
       throw new NotFoundError('Buku tidak ditemukan')
     }
 
-    return book
+    const mapBooksDBToModel = (books) => (
+      books.map((book) => {
+        const { id, name, year, author, summary, publisher, pageCount, readPage, finished, reading, created_at, updated_at } = book
+        return {
+          id,
+          name,
+          year,
+          author,
+          summary,
+          publisher,
+          pageCount,
+          readPage,
+          finished,
+          reading,
+          insertedAt: created_at,
+          updatedAt: updated_at
+        }
+      })
+    )
+
+    return mapBooksDBToModel(book)[0]
   }
 
   async editBookById (id, {
