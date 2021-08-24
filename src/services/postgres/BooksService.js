@@ -105,7 +105,7 @@ class BooksService {
   }) {
     const updatedAt = new Date().toISOString()
     const query = {
-      text: 'UPDATE books SET name = $1, year = $2, author = $3, summary = $4, publisher = $5, pageCount = $6, readPage = $7, reading = $8, updated_at = $9 WHERE id = $10 RETURNING id',
+      text: 'UPDATE books SET name = $1, year = $2, author = $3, summary = $4, publisher = $5, page_count = $6, read_page = $7, reading = $8, updated_at = $9 WHERE id = $10 RETURNING id',
       values: [name, year, author, summary, publisher, pageCount, readPage, reading, updatedAt, id]
     }
 
