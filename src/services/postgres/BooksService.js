@@ -9,7 +9,7 @@ class BooksService {
     this._pool = new Pool()
   }
 
-  async addBooks ({
+  async addBook ({
     name, year, author, summary, publisher, pageCount, readPage, reading
   }) {
     const id = `book-${nanoid(16)}`
