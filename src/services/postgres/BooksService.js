@@ -29,24 +29,39 @@ class BooksService {
     const result = await this._pool.query(query)
 
     if (!result.rows[0].id) {
-      throw new InvariantError('Lagu gagal ditambahkan')
+      throw new InvariantError('Buku gagal ditambahkan')
     }
 
     return result.rows[0].id
   }
 
   async getBooks ({ name, reading, finished }) {
-    const books = await this._pool.query('SELECT id, name, publisher FROM books')
+    const results = await this._pool.query('SELECT * FROM books')
+    const books = results.rows
 
     const filterBooksByName = books.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()))
     const filterBooksByReading = books.filter((book) => book.reading === Boolean(Number(reading)))
     const filterBooksByFinished = books.filter((book) => book.finished === Boolean(Number(finished)))
 
-    return (name !== '')
-      ? filterBooksByName
-      : (reading !== '')
-          ? filterBooksByReading
-          : (finished !== '') ? filterBooksByFinished : books
+    const mapBooksDBToModel = (books) => (
+      books.map((book) => {
+        const { id, name, publisher } = book
+        return {
+          id: id,
+          name: name,
+          publisher: publisher
+        }
+      })
+    )
+
+    return mapBooksDBToModel(
+      (name !== '')
+        ? filterBooksByName
+        : (reading !== '')
+            ? filterBooksByReading
+            : (finished !== '')
+                ? filterBooksByFinished
+                : books)
   }
 
   async getBookById (id) {
